@@ -18,7 +18,8 @@ if [[ ! -z "$IN_STORE_USERNAME" && ! -z "$IN_STORE_PASSWORD" ]]; then
         "$IN_STORE_URL": "$IN_STORE_USERNAME:$IN_STORE_PASSWORD"
       }
     }
-    EOF
+EOF
+  
   chmod 0600 ~/.codechecker.passwords.json
 fi
 
