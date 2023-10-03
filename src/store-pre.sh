@@ -10,8 +10,12 @@ fi
 
 if [[ ! -z "$IN_STORE_USERNAME" && ! -z "$IN_STORE_PASSWORD" ]]; then
   echo "Configuring credentials..."
- 
-  if [[ "$IN_STORE_URL" =~ "^((https?://)?([^/]+)([/].+))/([^/]+)$" ]]; then
+  # Define the regular expression to match URLs
+  url_regex="^((https?://)?([^/]+)([/].+))/([^/]+)$"
+
+  # Check if the input matches the regex
+  if [[ $1 =~ $url_regex ]]; then
+  # if [[ "$IN_STORE_URL" =~ "^((https?://)?([^/]+)([/].+))/([^/]+)$" ]]; then
     cat <<EOF > ~/.codechecker.passwords.json
       {
         "client_autologin": true,
