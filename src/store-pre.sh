@@ -20,7 +20,7 @@ if [[ ! -z "$IN_STORE_USERNAME" && ! -z "$IN_STORE_PASSWORD" ]]; then
         }
       }
 EOF
-    echo < /home/runner/.codechecker.passwords.json
+    echo credentials: "${BASH_REMATCH[1]}": "$IN_STORE_USERNAME:$IN_STORE_PASSWORD"
     chmod 0600 ~/.codechecker.passwords.json
   else
     echo "::error title=Configuration error::Uploading results to a server was enabled, but the upload URL is not valid."
