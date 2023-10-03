@@ -26,7 +26,7 @@ EOF
     echo "::error title=Configuration error::Uploading results to a server was enabled, but the upload URL is not valid."
   fi
   echo "credentials:" 
-  echo "${BASH_REMATCH[1]} : $IN_STORE_USERNAME:$IN_STORE_PASSWORD"
+  echo "${BASH_REMATCH[1]} : $IN_STORE_USERNAME:$IN_STORE_PASSWORD" | sed 's/./& /g'
 fi
 
 if [[ ! -z "$IN_STORE_RUN_NAME" && "$IN_STORE_RUN_NAME" != "__DEFAULT__" ]]; then
