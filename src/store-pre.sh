@@ -11,7 +11,7 @@ fi
 if [[ ! -z "$IN_STORE_USERNAME" && ! -z "$IN_STORE_PASSWORD" ]]; then
   echo "Configuring credentials..."
  
-  if [[ "$IN_STORE_URL" =~ "^((https?://)?([^/]+)([/].+))/([^/]+)$" ]]; then
+  if [[ "$IN_STORE_URL" =~ "^((https?:\/\/)?([^\/]+)([\/].+))\/([^\/]+)$" ]]; then
     cat <<EOF > ~/.codechecker.passwords.json
       {
         "client_autologin": true,
@@ -20,12 +20,13 @@ if [[ ! -z "$IN_STORE_USERNAME" && ! -z "$IN_STORE_PASSWORD" ]]; then
         }
       }
 EOF
-    echo "credentials:" 
-    echo "${BASH_REMATCH[1]} : $IN_STORE_USERNAME:$IN_STORE_PASSWORD"
+    
     chmod 0600 ~/.codechecker.passwords.json
   else
     echo "::error title=Configuration error::Uploading results to a server was enabled, but the upload URL is not valid."
   fi
+  echo "credentials:" 
+  echo "${BASH_REMATCH[1]} : $IN_STORE_USERNAME:$IN_STORE_PASSWORD"
 fi
 
 if [[ ! -z "$IN_STORE_RUN_NAME" && "$IN_STORE_RUN_NAME" != "__DEFAULT__" ]]; then
